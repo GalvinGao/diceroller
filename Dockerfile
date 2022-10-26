@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine AS builder
+FROM golang:1.19-alpine AS builder
 
 WORKDIR /app
 ENV GOOS linux
@@ -7,7 +7,7 @@ ENV GOARCH amd64
 COPY go.mod ./
 COPY go.sum ./
 
-RUN go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
+# RUN go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 RUN go mod download
 
 COPY *.go ./
