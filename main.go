@@ -73,6 +73,8 @@ func main() {
 	cli := lark.New(
 		lark.WithAppCredential(os.Getenv("FEISHU_APP_ID"), os.Getenv("FEISHU_APP_SECRET")),
 		lark.WithEventCallbackVerify(os.Getenv("FEISHU_ENCRYPT_KEY"), os.Getenv("FEISHU_VERIFICATION_TOKEN")),
+		lark.WithOpenBaseURL("https://open.larksuite.com"),
+		lark.WithWWWBaseURL("https://www.larksuite.com"),
 	)
 
 	// handle message callback
