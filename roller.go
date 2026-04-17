@@ -3,10 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math/rand"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/justinian/dice"
 )
@@ -49,8 +47,6 @@ func roll(desc string) (d string, err error) {
 	if count <= 0 || count > 100000 {
 		return "", errors.New("invalid dice count range: dice count should in range (0, 100000]")
 	}
-
-	rand.Seed(time.Now().UnixNano())
 
 	result, _, err := dice.Roll(desc)
 	if err != nil {

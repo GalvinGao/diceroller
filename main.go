@@ -88,12 +88,12 @@ func main() {
 			e := strings.TrimPrefix(c, "=")
 			expr, err := govaluate.NewEvaluableExpression(e)
 			if err != nil {
-				_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, fmt.Sprintf("已识别 evaluation 命令，但在 evaluate 时出现了问题："+err.Error()))
+				_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, "已识别 evaluation 命令，但在 evaluate 时出现了问题："+err.Error())
 				return "", err
 			}
 			res, err := expr.Eval(nil)
 			if err != nil {
-				_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, fmt.Sprintf("已识别 evaluation 命令，但在 evaluate 时出现了问题："+err.Error()))
+				_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, "已识别 evaluation 命令，但在 evaluate 时出现了问题："+err.Error())
 				return "", err
 			}
 			cli.Message.Reply(event.Message.MessageID).SendText(ctx, fmt.Sprintf("%v：%v", e, res))
@@ -130,7 +130,7 @@ func main() {
 		log.Println("rolling cost", end.String())
 		if err != nil && err != ErrorIgnore {
 			log.Println("failed to roll dice: " + err.Error())
-			_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, fmt.Sprintf("已识别 roll 命令，但在 roll 时出现了问题："+err.Error()))
+			_, _, err = cli.Message.Reply(event.Message.MessageID).SendText(ctx, "已识别 roll 命令，但在 roll 时出现了问题："+err.Error())
 			return "", err
 		}
 		if err == ErrorIgnore {
