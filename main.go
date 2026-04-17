@@ -16,7 +16,10 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 )
 
-var rollDefault = "1d100"
+var (
+	Version     = "dev"
+	rollDefault = "1d100"
+)
 
 type Message struct {
 	Text string `json:"text"`
@@ -84,6 +87,11 @@ func main() {
 		}
 
 		c := strings.TrimSpace(unmarshalMessageContent(event.Message.Content))
+		if c == "version" {
+			cli.Message.Reply(event.Message.MessageID).SendText(ctx, "diceroller version: "+Version)
+			return "", nil
+		}
+
 		if strings.HasPrefix(c, "=") {
 			e := strings.TrimPrefix(c, "=")
 			expr, err := govaluate.NewEvaluableExpression(e)
